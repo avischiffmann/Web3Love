@@ -23,9 +23,8 @@ export default function HomePage() {
     // address: '0x72B6Dc1003E154ac71c76D3795A3829CfD5e33b9',
   });
   useEffect(() => {
-    if (canvas.current.canvas.grid) {
-    }
-  }, [canvas.current]);
+    canvas.current.ctx.drawing.drawImage(canvas.current.canvas.grid, 0, 0);
+  }, [canvas]);
 
   useEffect(() => {
     getNFTBalances();
@@ -90,13 +89,11 @@ export default function HomePage() {
           <div className='mx-auto mt-8 flex flex-col justify-start rounded-md'>
             <div className='relative mt-8 w-full'>
               <CanvasDraw
-                backgroundColor={'000'}
                 hideGrid={true}
                 canvasHeight={697}
                 canvasWidth={1024}
-                brushColor={'red'}
-                imgSrc={'/images/envelope_background.jpg'}
-                backgroundImage={'/images/envelope_background.jpg'}
+                imgSrc={'/images/envelope_background.png'}
+                backgroundImage={'/images/envelope_background.png'}
                 hideInterface={true}
                 ref={canvas}
                 className={'bg-transparent'}
@@ -104,9 +101,6 @@ export default function HomePage() {
 
               <div className='absolute top-16 right-24'>
                 <img
-                  style={{
-                    opacity: 0,
-                  }}
                   src='/images/envelope_stamp.png'
                   alt=''
                   ref={postcardImage}
@@ -126,15 +120,10 @@ export default function HomePage() {
                       // );
 
                       /* TODO: change coordinates here*/
-
                       ctx.clearRect(100, 100, 450, 250);
                       ctx.font = '24px serif';
-                      canvas.current.ctx.drawing.drawImage(
-                        canvas.current.canvas.grid,
-                        0,
-                        0
-                      );
                       wrapText(ctx, e.target.value, 150, 170, 400, 24);
+                      // ctx.fillText(e.target.value, 150, 150);
                       setMessage(e.target.value);
                     }
                   }}
